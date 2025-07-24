@@ -27,7 +27,7 @@ def query_vector(q: str = Query(..., description="User question")):
     docs_with_scores = vectorstore.similarity_search_with_score(q, k=5)
 
     # Set threshold (you can tune this — values typically between 0.6 and 0.8)
-    threshold = 0.65
+    threshold = 0.1
     filtered = [
         {"content": doc.page_content, "metadata": doc.metadata}
         for doc, score in docs_with_scores
