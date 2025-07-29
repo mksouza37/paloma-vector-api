@@ -4,17 +4,18 @@ from typing import List
 from sentence_transformers import SentenceTransformer
 
 app = FastAPI()
-model = SentenceTransformer("intfloat/multilingual-e5-small")
+
+# Modelo leve e multilíngue (roda em 512MB)
+model = SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
 
 class EmbedResponse(BaseModel):
     embedding: List[float]
-    model: str = "intfloat/multilingual-e5-small"
+    model: str = "paraphrase-multilingual-MiniLM-L12-v2"
 
 @app.get("/embed", response_model=EmbedResponse)
 def embed_text(q: str = Query(...)):
-    # E5 exige prefixo "query: "
-    vector = model.encode(f"query: {q}").tolist()
+    vector = model.encode(q).tolist()
     return {
         "embedding": vector,
-        "model": "intfloat/multilingual-e5-small"
+        "model": "paraphrase-multilingual-MiniLM-L12-v2"
     }
