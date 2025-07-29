@@ -1,8 +1,10 @@
 fastapi
 uvicorn
-openai
-langchain
-langchain-community
-faiss-cpu
-tiktoken
+sentence-transformers
+#openai
+#langchain
+#langchain-community
+#faiss-cpu
+#tiktoken
+
 
